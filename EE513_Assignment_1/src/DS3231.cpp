@@ -71,7 +71,7 @@ int main(){
 
    //Temp
 
-   int addr =0x11; // The Address to communicate
+   int addrTemp =0x11; // The Address to communicate
 
       if(ioctl(file, I2C_SLAVE, addr) < 0){
       perror("Failed to connect to the sensor\n");
