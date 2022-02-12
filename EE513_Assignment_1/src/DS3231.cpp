@@ -13,7 +13,6 @@ using namespace std;
 #include<unistd.h> //On Unix-like systems, unistd.h is typically made up largely of system call wrapper functions such as fork, pipe and I/O primitives (read, write, close, etc.).
 #include<linux/i2c-dev.h> // bus interfaceioctl
 #define BUFFER_SIZE 19  //allocates the memory for the OS  //0x00 to 0x12
-#include "DS3231.h"
 
 
 class DS3231{
