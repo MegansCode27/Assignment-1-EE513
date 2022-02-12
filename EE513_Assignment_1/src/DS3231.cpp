@@ -41,7 +41,7 @@ int main(){
 	printf("Connected to the DS3231 RTC Clock\n ");
    }
 
-   char writeBuffer[1] = {0x68};
+   char writeBuffer[1] = {0x00};
    if(write(file, writeBuffer, 1)!=1){
       perror("Failed to reset the read address\n");
       return 1;
@@ -56,9 +56,9 @@ int main(){
       perror("Failed to read in the buffer\n");
       return 1;
    }
-   //printf("The RTC time is %02d:%02d:%02d\n", bcdToDec(buf[2]),
-        // bcdToDec(buf[1]), bcdToDec(buf[0]));
-   //close(file);
-  // return 0;*/
+   printf("The RTC time is %02d:%02d:%02d\n", bcdToDec(buf[2]),
+    bcdToDec(buf[1]), bcdToDec(buf[0]));
+   close(file);
+   return 0;
 }
 
