@@ -40,7 +40,7 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := EE513 Assignment 1
+BUILD_ARTIFACT_NAME := EE513_Assignment_1
 BUILD_ARTIFACT_EXTENSION :=
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
@@ -51,19 +51,19 @@ BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ART
 all: main-build
 
 # Main-build Target
-main-build: EE513\ Assignment\ 1
+main-build: EE513_Assignment_1
 
 # Tool invocations
-EE513\ Assignment\ 1: $(OBJS) $(USER_OBJS) makefile objects.mk $(OPTIONAL_TOOL_DEPS)
+EE513_Assignment_1: $(OBJS) $(USER_OBJS) makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MacOS X C++ Linker'
-	g++  -o "EE513 Assignment 1" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++  -o "EE513_Assignment_1" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) EE513\\ Assignment\\ 1
+	-$(RM) EE513_Assignment_1
 	-@echo ' '
 
 .PHONY: all clean dependents main-build
