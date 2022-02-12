@@ -46,11 +46,7 @@ int main(){
       perror("Failed to reset the read address\n");
       return 1;
    }
-   else
-   {
-	   printf("Reset the read Address to \n" , writeBuffer[1]);
 
-   }
    char buf[BUFFER_SIZE];
    if(read(file, buf, BUFFER_SIZE)!=BUFFER_SIZE){
       perror("Failed to read in the buffer\n");
