@@ -14,6 +14,8 @@ using namespace std;
 #include<linux/i2c-dev.h> // bus interfaceioctl
 #define BUFFER_SIZE 19  //allocates the memory for the OS  //0x00 to 0x12
 
+//states
+int file;
 
 
 // the time is in the registers in encoded decimal form
@@ -21,8 +23,15 @@ int bcdToDec(char b) { return (b/16)*10 + (b%16); }
 
 
 
+  int getTemp(int address){
+
+	  char writeBuffer[1] = {0x11};
+	  printf("The value of WriteBuffer is ",writeBuffer);
+	  cout<< writeBuffer<<endl;
+  }
+
 int main(){
-   int file; // creates a integer value File
+   // creates a integer value File
    printf("Starting the DS3231 test application\n");//messagae to the user
    if((file=open("/dev/i2c-1", O_RDWR)) < 0){
       perror("failed to open the bus\n");
@@ -63,9 +72,8 @@ int main(){
 
    // Get the Temperature
 
-   printf("The RTC Temperature is %02d\n", bcdToDec(buf[15]),
-      bcdToDec(buf[40]));
-
+    int address = 0x68;
+    printf( "Temp is " , getTemp(address));
 
    close(file);
    return 0;
