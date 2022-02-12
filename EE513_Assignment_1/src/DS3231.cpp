@@ -38,14 +38,18 @@ int main(){
    }
    else
    {
-	printf("Connected to the DS3231 RTC Clock ");
+	printf("Connected to the DS3231 RTC Clock\n ");
    }
 
-   /*
-   char writeBuffer[1] = {0x00};
+   char writeBuffer[1] = {0x68};
    if(write(file, writeBuffer, 1)!=1){
       perror("Failed to reset the read address\n");
       return 1;
+   }
+   else
+   {
+	   printf("Reset the read Address\n");
+
    }
    char buf[BUFFER_SIZE];
    if(read(file, buf, BUFFER_SIZE)!=BUFFER_SIZE){
