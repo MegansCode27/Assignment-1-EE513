@@ -5,15 +5,18 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../src/Byte_Manipulation.cpp \
-../src/DS3231.cpp 
+../src/DS3231.cpp \
+../src/Temperature.cpp 
 
 CPP_DEPS += \
 ./src/Byte_Manipulation.d \
-./src/DS3231.d 
+./src/DS3231.d \
+./src/Temperature.d 
 
 OBJS += \
 ./src/Byte_Manipulation.o \
-./src/DS3231.o 
+./src/DS3231.o \
+./src/Temperature.o 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -28,7 +31,7 @@ src/%.o: ../src/%.cpp src/subdir.mk
 clean: clean-src
 
 clean-src:
-	-$(RM) ./src/Byte_Manipulation.d ./src/Byte_Manipulation.o ./src/DS3231.d ./src/DS3231.o
+	-$(RM) ./src/Byte_Manipulation.d ./src/Byte_Manipulation.o ./src/DS3231.d ./src/DS3231.o ./src/Temperature.d ./src/Temperature.o
 
 .PHONY: clean-src
 

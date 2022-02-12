@@ -13,6 +13,7 @@ using namespace std;
 #include<unistd.h> //On Unix-like systems, unistd.h is typically made up largely of system call wrapper functions such as fork, pipe and I/O primitives (read, write, close, etc.).
 #include<linux/i2c-dev.h> // bus interfaceioctl
 
+
 #define BUFFER_SIZE 19  //allocates the memory for the OS  //0x00 to 0x12
 
 //states
@@ -57,7 +58,6 @@ int main(){
    }
 
    char buf[BUFFER_SIZE];
-;
    if(read(file, buf, BUFFER_SIZE)!=BUFFER_SIZE){
       perror("Failed to read in the buffer\n");
       return 1;
@@ -69,10 +69,18 @@ int main(){
       bcdToDec(buf[5]), bcdToDec(buf[6]));
 
 
-   // Get the Temperature
+   //Temp
 
-   printf("The RTC Temperature is :%02d:%02d", bcdToDec(buf[11]),
-      bcdToDec(buf[12]));
+   int addr =0x11; // The Address to communicate
+
+      if(ioctl(file, I2C_SLAVE, addr) < 0){
+      perror("Failed to connect to the sensor\n");
+      return 1;
+      }
+      else
+      {
+   	   printf("Temperature ");
+      }
 
 
    close(file);
