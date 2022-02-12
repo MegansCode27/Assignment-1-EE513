@@ -79,7 +79,7 @@ int main(){
       }
       else
       {
-   	   printf("Temperature ");
+   	   printf("Temperature ",addrTemp);
       }
 
 
