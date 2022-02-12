@@ -91,8 +91,8 @@ int main(){
       else
       {
      //cout << "0x11 & 0x12  (AND) is " << display(addrTemp & addrTempLow) << endl;
-     printf("Temperature is %f degress Celsius \n", bcdToDec(buf[addrTemp]));
-     printf("Temperature is %f degress fahrenheit \n",bcdToDec(buf[addrTempLow]));
+     printf("Temperature is %x degress Celsius \n", bcdToDec(buf[addrTemp]));
+     printf("Temperature is %x degress fahrenheit \n",bcdToDec(buf[addrTempLow]));
       }
 
 
