@@ -65,13 +65,13 @@ int main(){
          return 1;
       }
 
-      char buf[BUFFER_SIZE];
-      if(read(file, buf, BUFFER_SIZE)!=BUFFER_SIZE){
+      char buf2[BUFFER_SIZE];
+      if(read(file, buf2, BUFFER_SIZE)!=BUFFER_SIZE){
          perror("Failed to read in the buffer\n");
          return 1;
       }
 
-   printf("The Temperature is ", bcdToDec(buf[4]));
+   printf("The Temperature is ", bcdToDec(buf2[4]));
 
 
    close(file);
