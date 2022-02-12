@@ -12,8 +12,7 @@ using namespace std;
 #include<sys/ioctl.h> // standards for the Kernel
 #include<unistd.h> //On Unix-like systems, unistd.h is typically made up largely of system call wrapper functions such as fork, pipe and I/O primitives (read, write, close, etc.).
 #include<linux/i2c-dev.h> // bus interfaceioctl
-#include <Wire.h>
-#include <LiquidCrystal.h>
+
 #define BUFFER_SIZE 19  //allocates the memory for the OS  //0x00 to 0x12
 
 //states
@@ -21,7 +20,11 @@ int file;
 
 
 // the time is in the registers in encoded decimal form
-int bcdToDec(char b) { return (b/16)*10 + (b%16); }
+int bcdToDec(char b) {
+
+	return (b/16)*10 + (b%16);
+
+}
 
 
 
@@ -68,19 +71,8 @@ int main(){
 
    // Get the Temperature
 
-   float rtcMinus() {
-   Wire.beginTransmission(DS3231_I2C_ADDRESS);
-   Wire.write(0x11);   // the register where the temp data are stored
-   Wire.endTransmission();
-   Wire.requestFrom(DS3231_I2C_ADDRESS, 2); // ask for two bytes
-   if (Wire.available())
-   {
-        tMSB = Wire.read();      // 2s complement int portion
-        tLSB = Wire.read();       // fraction portion
-        rtcTempC = ((((short)tMSB << 8) | (short)tLSB) >> 6) / 4.0;
-   }
-   return rtcTempC;
-   }
+   printf("The RTC Temperature is :%02d:%02d", bcdToDec(buf[11]),
+      bcdToDec(buf[12]));
 
 
    close(file);
