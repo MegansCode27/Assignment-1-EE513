@@ -55,7 +55,7 @@ int main(){
    if(read(file, buf, BUFFER_SIZE)!=BUFFER_SIZE){
       perror("Failed to read in the buffer\n");
       return 1;
-   }*/
+   }
    //printf("The RTC time is %02d:%02d:%02d\n", bcdToDec(buf[2]),
         // bcdToDec(buf[1]), bcdToDec(buf[0]));
    //close(file);
