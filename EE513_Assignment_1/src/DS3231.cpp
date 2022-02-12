@@ -23,13 +23,6 @@ int bcdToDec(char b) { return (b/16)*10 + (b%16); }
 
 
 
-  virtual void getTemp(int address){
-
-	  char writeBuffer[1] = {0x11};
-	  printf("The value of WriteBuffer is ",writeBuffer);
-	  cout<< writeBuffer<<endl;
-  }
-
 int main(){
    // creates a integer value File
    printf("Starting the DS3231 test application\n");//messagae to the user
@@ -72,8 +65,9 @@ int main(){
 
    // Get the Temperature
 
-    int address = 0x68;
-    printf( "Temp is " , getTemp(address));
+   char writeBuffer[1] = {0x11};
+  	  printf("The value of WriteBuffer is ",writeBuffer);
+  	  cout<< writeBuffer<<endl;
 
    close(file);
    return 0;
