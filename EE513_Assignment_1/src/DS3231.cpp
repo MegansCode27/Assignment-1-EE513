@@ -67,7 +67,7 @@ int main(){
 
    char writeBufferTemp[2] = {0x11,0x12};
   	  printf("The value of WriteBuffer is ",writeBuffer);
-  	  cout<< writeBuffer<<endl;
+  	  cout<< writeBufferTemp<<endl;
 
    close(file);
    return 0;
