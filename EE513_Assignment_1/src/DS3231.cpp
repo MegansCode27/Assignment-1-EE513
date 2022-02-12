@@ -65,7 +65,7 @@ int main(){
 
    // Get the Temperature
 
-   char writeBuffer[2] = {0x11,0x12};
+   char writeBufferTemp[2] = {0x11,0x12};
   	  printf("The value of WriteBuffer is ",writeBuffer);
   	  cout<< writeBuffer<<endl;
 
