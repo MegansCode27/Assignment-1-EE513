@@ -63,8 +63,8 @@ int main(){
 
    // Get the Temperature
 
-   printf("The RTC Temperature is %02d\n", bcdToDec(buf[11]),
-      bcdToDec(buf[12]));
+   printf("The RTC Temperature is %02d\n", bcdToDec(buf[15]),
+      bcdToDec(buf[40]));
 
 
    close(file);

@@ -16,7 +16,7 @@ string display(uint8_t a) {
 }
 
 int main(){
-   uint8_t a = 25, b = 5;
+   uint8_t a = 15, b = 40;
    cout << "A is " << display(a) << " and B is " << display(b) << endl;
    cout << "A & B  (AND) is " << display(a & b) << endl;
    cout << "A | B  (OR)  is " << display(a | b) << endl;
