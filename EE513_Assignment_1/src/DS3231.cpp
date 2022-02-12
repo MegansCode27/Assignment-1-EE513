@@ -66,25 +66,7 @@ int main(){
 
    // Get the Temperature
 
-    char writeBufferTemp[2] = {0x11,0x12};
-
-    if(write(file, writeBufferTemp, 1)!=1){
-          perror("Failed to reset the read address\n");
-          return 1;
-       }
-
-       char buf2[BUFFER_SIZE];
-       if(read(file, buf2, BUFFER_SIZE)!=BUFFER_SIZE){
-          perror("Failed to read in the buffer\n");
-          return 1;
-       }
-
-
-  	  for (int i=0;i<3;i++){
-  		  printf("Values are\n", writeBufferTemp[i]);
-  	  }
-  	 printf("The Temp is %02d:%02d:%02d\n", bcdToDec(buf2[11]),
-  	      bcdToDec(buf2[12]));
+   //add later
 
 
    close(file);
