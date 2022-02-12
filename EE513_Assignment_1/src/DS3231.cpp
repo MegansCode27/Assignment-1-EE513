@@ -58,6 +58,13 @@ int main(){
    printf("The RTC date is %02d:%02d:%02d\n", bcdToDec(buf[4]),
       bcdToDec(buf[5]), bcdToDec(buf[6]));
 
+
+   // Get the Temperature
+
+
+   printf("The Temperature is ", bcdToDec(buf[11]));
+
+
    close(file);
    return 0;
 }
