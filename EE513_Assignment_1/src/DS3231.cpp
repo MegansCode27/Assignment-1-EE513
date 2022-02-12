@@ -81,7 +81,8 @@ int main(){
    //Temp
 
    int addrTemp =0x11; // The Address to communicate
-   uint8_t a = addrTemp;
+   int addrTemplow = 0x12;
+
 
       if(ioctl(file, I2C_SLAVE, addrTemp) < 0){
       perror("Failed to connect to the sensor\n");
@@ -89,7 +90,9 @@ int main(){
       }
       else
       {
-   	   cout << "Temp is " << display(a);
+   	   cout << "Temp is " << display(addrTemp);
+     	cout << "0x11 & 0x12  (AND) is " << display(addrTemp & addrTemplow) << endl;
+
       }
 
    close(file);
