@@ -48,7 +48,7 @@ int main(){
    }
    else
    {
-	   printf("Reset the read Address to \n" , writeBuffer);
+	   printf("Reset the read Address to \n" , writeBuffer[1]);
 
    }
    char buf[BUFFER_SIZE];
