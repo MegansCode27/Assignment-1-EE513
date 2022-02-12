@@ -66,7 +66,7 @@ int main(){
 
    // Get the Temperature
 
-    char writeBufferTemp[2] = {0x15,0x40};
+    char writeBufferTemp[2] = {0x11,0x12};
 
     if(write(file, writeBufferTemp, 1)!=1){
           perror("Failed to reset the read address\n");
