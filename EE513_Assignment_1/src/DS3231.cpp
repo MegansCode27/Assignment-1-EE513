@@ -11,7 +11,8 @@ using namespace std;
 #include<fcntl.h> // Construct for file control
 #include<sys/ioctl.h> // standards for the Kernel
 #include<unistd.h> //On Unix-like systems, unistd.h is typically made up largely of system call wrapper functions such as fork, pipe and I/O primitives (read, write, close, etc.).
-//#include<linux/i2c-dev.h> // bus interfaceioctl
+#include<linux/i2c-dev.h> // bus interfaceioctl
+#include <i2c/smbus.h>
 #define BUFFER_SIZE 19  //allocates the memory for the OS  //0x00 to 0x12
 
 
@@ -27,13 +28,17 @@ int main(){
       return 1;
    }
    else {
-	   printf("Opened the bus");
+	   printf("Opened the bus\n");
    }
 
-  /* if(ioctl(file, I2C_SLAVE, 0x68) < 0){
-      perror("Failed to connect to the sensor\n");
-      return 1;
+   int addr =0x68; // The Address to communicate
+
+   if(ioctl(file, I2C_SLAVE, addr) < 0){
+   perror("Failed to connect to the sensor\n");
+   return 1;
    }
+
+   /*
    char writeBuffer[1] = {0x00};
    if(write(file, writeBuffer, 1)!=1){
       perror("Failed to reset the read address\n");
@@ -47,6 +52,6 @@ int main(){
    //printf("The RTC time is %02d:%02d:%02d\n", bcdToDec(buf[2]),
         // bcdToDec(buf[1]), bcdToDec(buf[0]));
    //close(file);
-  // return 0;
+  // return 0;*/
 }
 
