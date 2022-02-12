@@ -69,7 +69,7 @@ int main(){
   	  printf("The value of WriteBuffer is ",writeBuffer);
 
   	  for (int i=0;i<3;i++){
-  		  cout<< writeBufferTemp[i] <<endl;
+  		  printf("Values are\n", writeBufferTemp[i]);
   	  }
 
 
