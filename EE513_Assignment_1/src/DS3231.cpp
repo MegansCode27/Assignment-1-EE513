@@ -36,6 +36,10 @@ int main(){
    perror("Failed to connect to the sensor\n");
    return 1;
    }
+   else
+   {
+	printf("Connected to the DS3231 RTC Clock ");
+   }
 
    /*
    char writeBuffer[1] = {0x00};
