@@ -23,7 +23,7 @@ int bcdToDec(char b) { return (b/16)*10 + (b%16); }
 
 
 
-  int getTemp(int address){
+  virtual void getTemp(int address){
 
 	  char writeBuffer[1] = {0x11};
 	  printf("The value of WriteBuffer is ",writeBuffer);
