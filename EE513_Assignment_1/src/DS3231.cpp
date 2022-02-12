@@ -12,6 +12,11 @@ using namespace std;
 #include<sys/ioctl.h> // standards for the Kernel
 #include<unistd.h> //On Unix-like systems, unistd.h is typically made up largely of system call wrapper functions such as fork, pipe and I/O primitives (read, write, close, etc.).
 #include<linux/i2c-dev.h> // bus interfaceioctl
+#include<stdint.h>
+#include<bitset>
+#include<sstream>
+#include<iomanip>
+using namespace std;
 
 
 #define BUFFER_SIZE 19  //allocates the memory for the OS  //0x00 to 0x12
@@ -26,7 +31,11 @@ int bcdToDec(char b) {
 	return (b/16)*10 + (b%16);
 
 }
-
+string display(uint8_t a) {
+   stringstream ss;
+   ss << setw(3) << (int)a << "(" << bitset<8>(a) << ")";
+   return ss.str();
+}
 
 
 int main(){
@@ -72,6 +81,7 @@ int main(){
    //Temp
 
    int addrTemp =0x11; // The Address to communicate
+   uint8_t a = addrTemp;
 
       if(ioctl(file, I2C_SLAVE, addrTemp) < 0){
       perror("Failed to connect to the sensor\n");
@@ -79,9 +89,8 @@ int main(){
       }
       else
       {
-   	   printf("Temperature ",addrTemp);
+   	   cout << "Temp is " << display(a);
       }
-
 
    close(file);
    return 0;
