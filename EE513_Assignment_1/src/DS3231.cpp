@@ -90,8 +90,7 @@ int main(){
       }
       else
       {
-   	   cout << "Temp is " << display(addrTemp);
-     	cout << "0x11 & 0x12  (AND) is " << display(addrTemp & addrTemplow) << endl;
+     cout << "0x11 & 0x12  (AND) is " << display(addrTemp & addrTemplow) << endl;
 
       }
 
