@@ -81,7 +81,7 @@ int main(){
    //Temp
 
    int addrTemp =0x11; // The Address to communicate
-   int addrTemplow = 0x12;
+   int addrTempLow = 0x12;
 
 
       if(ioctl(file, I2C_SLAVE, addrTemp) < 0){
@@ -90,9 +90,8 @@ int main(){
       }
       else
       {
-     cout << "0x11 & 0x12  (AND) is " << display(addrTemp & addrTemplow) << endl;
-     int temp = stoi (display(addrTemp & addrTemplow));
-     printf("Temperature is ", bcdToDec(buf[temp]));
+     cout << "0x11 & 0x12  (AND) is " << display(addrTemp & addrTempLow) << endl;
+     printf("Temperature is ", bcdToDec(buf[addrTemp]), bcdToDec(buf[addrTempLow]));
       }
 
 
