@@ -15,27 +15,10 @@ using namespace std;
 #define BUFFER_SIZE 19  //allocates the memory for the OS  //0x00 to 0x12
 
 
-class DS3231{
-
-	DS3231 RTC;
-};
-
 
 // the time is in the registers in encoded decimal form
 int bcdToDec(char b) { return (b/16)*10 + (b%16); }
-virtual void setup() { RTC.begin();}
 
-virtual void loop() {
-
-   int tempC;
-   int tempF;
-
-   tempC = RTC.getTemperature();
-   tempF = (tempC * 1.8) + 32.0; // Convert C to F
-
-    lcd.printf(tempF);
-    lcd.printf("F");
-}
 
 
 int main(){
