@@ -2,7 +2,7 @@
 
 /* Bits test by Derek Molloy */
 
-#include<iostream>
+/*#include<iostream>
 #include<stdint.h>
 #include<bitset>
 #include<sstream>
@@ -26,4 +26,4 @@ int main(){
    cout << "B >> 1 (LSR) is " << display(b >> 1) << endl;
    cout << "1 << 8 (LSL) is " << display(1 << 8) << endl; // ignore warning!
    return 0;
-}
+}*/
