@@ -91,8 +91,11 @@ int main(){
       else
       {
      cout << "0x11 & 0x12  (AND) is " << display(addrTemp & addrTemplow) << endl;
-
+     int temp = display(addrTemp & addrTemplow);
+     printf("Temperature is ", bcdToDec(buf[temp]));
       }
+
+
 
    close(file);
    return 0;
