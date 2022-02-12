@@ -13,11 +13,10 @@ using namespace std;
 #include<unistd.h> //On Unix-like systems, unistd.h is typically made up largely of system call wrapper functions such as fork, pipe and I/O primitives (read, write, close, etc.).
 #include<linux/i2c-dev.h> // bus interfaceioctl
 #define BUFFER_SIZE 19  //allocates the memory for the OS  //0x00 to 0x12
-
+#define DS3231_I2C_ADDRESS 104
 
 // the time is in the registers in encoded decimal form
 int bcdToDec(char b) { return (b/16)*10 + (b%16); }
-
 
 int main(){
    int file; // creates a integer value File
@@ -60,12 +59,24 @@ int main(){
 
 
    // Get the Temperature
+   char writeBuffer[2] = {0x11};
+      if(write(file, writeBuffer, 1)!=1){
+         perror("Failed to reset the read address\n");
+         return 1;
+      }
 
+      char buf[BUFFER_SIZE];
+      if(read(file, buf, BUFFER_SIZE)!=BUFFER_SIZE){
+         perror("Failed to read in the buffer\n");
+         return 1;
+      }
 
-   printf("The Temperature is ", bcdToDec(buf[11]));
+   printf("The Temperature is ", bcdToDec(buf[4]));
 
 
    close(file);
    return 0;
 }
+
+
 
