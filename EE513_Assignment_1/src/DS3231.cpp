@@ -72,6 +72,7 @@ string display(uint8_t a) {
 int main() {
 
 	int file;
+	DS3231 rtc;
 	// creates a integer value File
 	printf("Starting the DS3231 test application\n"); //messagae to the user
 
@@ -114,7 +115,6 @@ int main() {
 	}
 
 	// set current date and time
-	DS3231 rtc;
 	time_t t = rtc.GetTime();
 	std::cout << "current Time is " << ctime(&t) << std::endl;
 
