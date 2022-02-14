@@ -17,24 +17,12 @@ using namespace std;
 #include<sstream>
 #include<iomanip>
 using namespace std;
-
-#define DS3231_WRITE_ADRS (0x68 << 1)
-#define DS3231_READ_ADRS ((0x68 << 1) | 1)
-#define ALARM_1_BIT (1)
-#define ALARM_2_BIT (2)
-#define STATUS_REG_ADRS (0x0F)
-
-
+#include "Wire.h"
+#define DS3231_I2C_ADDRESS 0x68
 #define BUFFER_SIZE 19  //allocates the memory for the OS  //0x00 to 0x12
 
 //states
 int file;
-
-//Flags for loop
-volatile bool alarm1_flag = false;
-volatile bool alarm2_flag = false;
-
-
 
 
 // the time is in the registers in encoded decimal form
@@ -103,10 +91,18 @@ int main(){
 		printf("Temperature is %2d degress \n", bcdToDec(buf[addrTemp]));
 	}
 
+	//Update date and time to current
 
-
-	//Alarms
-
+	  Wire.beginTransmission(DS3231_I2C_ADDRESS);
+	  Wire.write(0); // set next input to start at the seconds register
+	  Wire.write(decToBcd(second)); // set seconds
+	  Wire.write(decToBcd(minute)); // set minutes
+	  Wire.write(decToBcd(hour)); // set hours
+	  Wire.write(decToBcd(dayOfWeek)); // set day of week (1=Sunday, 7=Saturday)
+	  Wire.write(decToBcd(dayOfMonth)); // set date (1 to 31)
+	  Wire.write(decToBcd(month)); // set month
+	  Wire.write(decToBcd(year)); // set year (0 to 99)
+	  Wire.endTransmission();
 
    close(file);
    return 0;
