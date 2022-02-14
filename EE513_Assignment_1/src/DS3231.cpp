@@ -93,16 +93,25 @@ int main(){
 
 	//Update date and time to current
 
-	  Wire.beginTransmission(DS3231_I2C_ADDRESS);
-	  Wire.write(0); // set next input to start at the seconds register
-	  Wire.write(decToBcd(second)); // set seconds
-	  Wire.write(decToBcd(minute)); // set minutes
-	  Wire.write(decToBcd(hour)); // set hours
-	  Wire.write(decToBcd(dayOfWeek)); // set day of week (1=Sunday, 7=Saturday)
-	  Wire.write(decToBcd(dayOfMonth)); // set date (1 to 31)
-	  Wire.write(decToBcd(month)); // set month
-	  Wire.write(decToBcd(year)); // set year (0 to 99)
-	  Wire.endTransmission();
+
+	int seconds = 0x00;
+	int minutes = 0x01;
+	int hours = 0x02;
+	int day=0x04;
+	int month=0x05;
+	int year=0x06;
+
+
+	if (ioctl(file, I2C_SLAVE, seconds,minutes,hours,day,month,year) < 0) {
+		perror("Failed to connect to the sensor\n");
+		return 1;
+	} else {
+		//cout << "0x11 & 0x12  (AND) is " << display(addrTemp & addrTempLow) << endl;
+
+		printf("Set RTC current date to %02d:%02d:%02d\n", bcdToDec(buf[day]),
+		      bcdToDec(buf[month]), bcdToDec(buf[year]));
+	}
+	;
 
    close(file);
    return 0;
