@@ -111,7 +111,7 @@ int main() {
 	}
 
 	// set current date and time
-	time_t t = rtc.DS3231::GetTime();
+	//time_t t = rtc.DS3231::GetTime();
 	std::cout << "current Time is " << ctime(&t) << std::endl;
 
 	close(file);
