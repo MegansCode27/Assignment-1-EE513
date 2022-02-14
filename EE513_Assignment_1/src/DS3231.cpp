@@ -16,6 +16,9 @@ using namespace std;
 #include<bitset>
 #include<sstream>
 #include<iomanip>
+#include <iostream>
+#include <chrono>
+#include <ctime>
 using namespace std;
 #define BUFFER_SIZE 19  //allocates the memory for the OS  //0x00 to 0x12
 
@@ -113,6 +116,19 @@ int main(){
 		printf("Set RTC current date to %02d:%02d:%02d\n", bcdToDec(buf[day]),
 		      bcdToDec(buf[month]), bcdToDec(buf[year]));
 	}
+
+
+
+    auto start = std::chrono::system_clock::now();
+    // Some computation here
+    auto end = std::chrono::system_clock::now();
+
+    std::chrono::duration<double> elapsed_seconds = end-start;
+    std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+
+    std::cout << "finished computation at " << std::ctime(&end_time)
+              << "elapsed time: " << elapsed_seconds.count() << "s\n";
+
 
    close(file);
    return 0;
