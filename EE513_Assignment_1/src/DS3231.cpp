@@ -22,37 +22,38 @@ using namespace std;
 using namespace std;
 #define BUFFER_SIZE 19  //allocates the memory for the OS  //0x00 to 0x12
 
-//states
-int file;
+class Rtc{
+
+	//states
+	int file;
 
 
-// the time is in the registers in encoded decimal form
-int bcdToDec(char b) {
+	// the time is in the registers in encoded decimal form
+	int bcdToDec(char b) {
 
-	return (b/16)*10 + (b%16);
-
-}
-string display(uint8_t a) {
-   stringstream ss;
-   ss << setw(3) << (int)a << "(" << bitset<8>(a) << ")";
-   return ss.str();
-}
-
-
-time_t GetTime(void){
-	union{
-		struct rtc_time rtc;
-		struct tm tm;
-	}
-	tm;
-	int ret=ioctl(file,RTC_RD_TIME, &tm.rtc);
-	if(ret<0){
-		throw std::system_error(errno,std::system_category(),"ioctl failed");
+		return (b/16)*10 + (b%16);
 
 	}
-	return mktime(&tm.tm);
-};
+	string display(uint8_t a) {
+	   stringstream ss;
+	   ss << setw(3) << (int)a << "(" << bitset<8>(a) << ")";
+	   return ss.str();
+	}
 
+
+	time_t GetTime(void){
+		union{
+			struct rtc_time rtc;
+			struct tm tm;
+		}
+		tm;
+		int ret=ioctl(file,RTC_RD_TIME, &tm.rtc);
+		if(ret<0){
+			throw std::system_error(errno,std::system_category(),"ioctl failed");
+
+		}
+		return mktime(&tm.tm);
+	};
 
 
 int main(){
@@ -110,7 +111,7 @@ int main(){
 
    // set current date and time
 	 Rtc rtc;
-	 time_t t= rtc.getTime();
+	 time_t t= rtc.GetTime();
 	 std::cout<<"current Time is " <<ctime(&t)<<std::endl;
 
 
