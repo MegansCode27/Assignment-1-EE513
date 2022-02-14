@@ -39,6 +39,22 @@ string display(uint8_t a) {
 }
 
 
+time_t GetTime(void){
+	union{
+		struct rtc_time rtc;
+		struct tm tm;
+	}
+	tm;
+	int ret=ioctl(file,RTC_RD_TIME, &tm.rtc);
+	if(ret<0){
+		throw std::system_error(errno,std::system_category(),"ioctl failed");
+
+	}
+	return mktime(&tm.tm);
+};
+
+
+
 int main(){
    // creates a integer value File
    printf("Starting the DS3231 test application\n");//messagae to the user
@@ -92,42 +108,11 @@ int main(){
 		printf("Temperature is %2d degress \n", bcdToDec(buf[addrTemp]));
 	}
 
-	//Update date and time to current
+   // set current date and time
+	 Rtc rtc;
+	 time_t t= rtc.getTime();
+	 std::cout<<"current Time is " <<ctime(&t)<<std::endl;
 
-
-	int seconds = 0x00;
-	int minutes = 0x01;
-	int hours = 0x02;
-	int day=0x04;
-	int month=0x05;
-	int year=0x06;
-
-
-	if (ioctl(file, I2C_SLAVE, seconds,minutes,hours,day,month,year) < 0) {
-		perror("Failed to connect to the sensor\n");
-		return 1;
-	} else {
-		//cout << "0x11 & 0x12  (AND) is " << display(addrTemp & addrTempLow) << endl;
-
-		printf("Set RTC current time is  %02d:%02d:%02d\n", bcdToDec(buf[hours]),
-		      bcdToDec(buf[minutes]), bcdToDec(buf[seconds]));
-
-
-		printf("Set RTC current date to %02d:%02d:%02d\n", bcdToDec(buf[day]),
-		      bcdToDec(buf[month]), bcdToDec(buf[year]));
-	}
-
-
-
-    auto start = std::chrono::system_clock::now();
-    // Some computation here
-    auto end = std::chrono::system_clock::now();
-
-    std::chrono::duration<double> elapsed_seconds = end-start;
-    std::time_t end_time = std::chrono::system_clock::to_time_t(end);
-
-    std::cout << "finished computation at " << std::ctime(&end_time)
-              << "elapsed time: " << elapsed_seconds.count() << "s\n";
 
 
    close(file);
