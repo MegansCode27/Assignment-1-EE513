@@ -42,10 +42,10 @@ public:
 	time_t GetTime(void) {
 
 		union {
-			struct rtc_time rtc_time;
+
 			struct tm tm;
 		} tm;
-		int ret = ioctl(file, I2C_SLAVE, &tm.rtc);
+		int ret = ioctl(file, I2C_SLAVE, &tm);
 		if (ret < 0) {
 			throw std::system_error(errno, std::system_category(),
 					"ioctl failed");
