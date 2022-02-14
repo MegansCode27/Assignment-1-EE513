@@ -42,7 +42,7 @@ public:
 	time_t GetTime(void) {
 
 		union {
-			struct rtc_time rtc;
+			struct rtc_time rtc_time;
 			struct tm tm;
 		} tm;
 		int ret = ioctl(file, I2C_SLAVE, &tm.rtc);
