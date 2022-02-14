@@ -16,9 +16,8 @@ using namespace std;
 #include<bitset>
 #include<sstream>
 #include<iomanip>
-#include <iostream>
-#include <chrono>
-#include <ctime>
+#include <time.h>
+#include <system_error>
 using namespace std;
 #define BUFFER_SIZE 19  //allocates the memory for the OS  //0x00 to 0x12
 
