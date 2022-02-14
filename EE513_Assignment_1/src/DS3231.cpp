@@ -106,10 +106,13 @@ int main(){
 	} else {
 		//cout << "0x11 & 0x12  (AND) is " << display(addrTemp & addrTempLow) << endl;
 
+		printf("Set RTC current time is  %02d:%02d:%02d\n", bcdToDec(buf[hours]),
+		      bcdToDec(buf[minutes]), bcdToDec(buf[seconds]));
+
+
 		printf("Set RTC current date to %02d:%02d:%02d\n", bcdToDec(buf[day]),
 		      bcdToDec(buf[month]), bcdToDec(buf[year]));
 	}
-	;
 
    close(file);
    return 0;
