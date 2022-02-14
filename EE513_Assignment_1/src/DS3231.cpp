@@ -11,7 +11,7 @@ using namespace std;
 #include<fcntl.h> // Construct for file control
 #include<sys/ioctl.h> // standards for the Kernel
 #include<unistd.h> //On Unix-like systems, unistd.h is typically made up largely of system call wrapper functions such as fork, pipe and I/O primitives (read, write, close, etc.).
-#include<linux/i2c-dev.h> // bus interfaceioctl
+//#include<linux/i2c-dev.h> // bus interfaceioctl
 #include<stdint.h>
 #include<bitset>
 #include<sstream>
@@ -22,50 +22,64 @@ using namespace std;
 using namespace std;
 #define BUFFER_SIZE 19  //allocates the memory for the OS  //0x00 to 0x12
 
-class Rtc{
+class DS3231{
 
 	//states
 	int file;
 
-
-	// the time is in the registers in encoded decimal form
-	int bcdToDec(char b) {
-
-		return (b/16)*10 + (b%16);
-
-	}
-	string display(uint8_t a) {
-	   stringstream ss;
-	   ss << setw(3) << (int)a << "(" << bitset<8>(a) << ")";
-	   return ss.str();
+	DS3231(){
+		 if((file=open("/dev/i2c-1", O_RDWR)) < 0){
+		      perror("failed to open the bus\n");
+		      return 1;
+		   }
+		   else {
+			   printf("Opened the bus\n");
+		   }
 	}
 
+	~DS3231(){
+		close(file);
+	}
 
-	time_t GetTime(void){
+
+    time_t GetTime(void){
+
 		union{
-			struct rtc_time rtc;
-			struct tm tm;
+		struct rtc_time DS3231;
+		struct tm tm;
 		}
 		tm;
-		int ret=ioctl(file,RTC_RD_TIME, &tm.rtc);
+	    int ret= ioctl(file,I2C_SLAVE, &tm.DS3231);
 		if(ret<0){
 			throw std::system_error(errno,std::system_category(),"ioctl failed");
 
 		}
 		return mktime(&tm.tm);
-	};
+
+
+};
+
+
+    // the time is in the registers in encoded decimal form
+    int bcdToDec(char b) {
+
+    	return (b/16)*10 + (b%16);
+
+    }
+    string display(uint8_t a) {
+       stringstream ss;
+       ss << setw(3) << (int)a << "(" << bitset<8>(a) << ")";
+       return ss.str();
+    }
+
 
 
 int main(){
+
+  int file;
    // creates a integer value File
    printf("Starting the DS3231 test application\n");//messagae to the user
-   if((file=open("/dev/i2c-1", O_RDWR)) < 0){
-      perror("failed to open the bus\n");
-      return 1;
-   }
-   else {
-	   printf("Opened the bus\n");
-   }
+
 
    int addr =0x68; // The Address to communicate
 
@@ -99,7 +113,7 @@ int main(){
    //Temp
 
 	int addrTemp = 0x11; // The Address to communicate
-	int addrTempLow = 0x12;
+
 
 	if (ioctl(file, I2C_SLAVE, addrTemp) < 0) {
 		perror("Failed to connect to the sensor\n");
@@ -110,11 +124,9 @@ int main(){
 	}
 
    // set current date and time
-	 Rtc rtc;
+	 DS3231 rtc;
 	 time_t t= rtc.GetTime();
 	 std::cout<<"current Time is " <<ctime(&t)<<std::endl;
-
-
 
    close(file);
    return 0;
