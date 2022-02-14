@@ -17,8 +17,6 @@ using namespace std;
 #include<sstream>
 #include<iomanip>
 using namespace std;
-#include "Wire.h"
-#define DS3231_I2C_ADDRESS 0x68
 #define BUFFER_SIZE 19  //allocates the memory for the OS  //0x00 to 0x12
 
 //states
