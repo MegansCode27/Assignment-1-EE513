@@ -25,6 +25,7 @@ class DS3231 {
 
 	//states
 	int file;
+	int addr=0x68;
 
 public:
 	DS3231() {
@@ -45,7 +46,7 @@ public:
 
 			struct tm tm;
 		} tm;
-		int ret = ioctl(file, I2C_SLAVE, &tm);
+		int ret = ioctl(file, I2C_SLAVE, addr);
 		if (ret < 0) {
 			throw std::system_error(errno, std::system_category(),
 					"ioctl failed");
