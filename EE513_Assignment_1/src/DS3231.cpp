@@ -29,7 +29,6 @@ class DS3231{
 	DS3231(){
 		 if((file=open("/dev/i2c-1", O_RDWR)) < 0){
 		      perror("failed to open the bus\n");
-		      return 1;
 		   }
 		   else {
 			   printf("Opened the bus\n");
@@ -44,9 +43,8 @@ class DS3231{
     time_t GetTime(void){
 
 		union{
-		struct rtc_time DS3231;
-		struct tm tm;
-		}
+		struct DS3231_time DS3231;
+		struct tm tm; }
 		tm;
 	    int ret= ioctl(file,I2C_SLAVE, &tm.DS3231);
 		if(ret<0){
@@ -131,3 +129,4 @@ int main(){
    return 0;
 }
 
+}
