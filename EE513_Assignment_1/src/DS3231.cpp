@@ -35,7 +35,7 @@ public:
             struct rtc_time rtc;
 			struct tm tm;
 		} tm;
-		int ret = ioctl(file, I2C_SLAVE, &tm.rtc);
+		int ret = ioctl(file, RTC_RD_TIME, &tm.rtc);
 		if (ret < 0) {
 			throw std::system_error(errno, std::system_category(),
 					"ioctl failed");
@@ -111,7 +111,7 @@ int main() {
 	}
 
 	// set current date and time
-	//time_t t = rtc.DS3231::GetTime();
+	time_t t = rtc.GetTime();
 	std::cout << "current Time is " << ctime(&t) << std::endl;
 
 	close(file);
