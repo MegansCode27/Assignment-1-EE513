@@ -28,25 +28,14 @@ class DS3231 {
 	int addr=0x68;
 
 public:
-	DS3231() {
-		if ((file = open("/dev/i2c-1", O_RDWR)) < 0) {
-			perror("failed to open the bus\n");
-		} else {
-			printf("Opened the bus\n");
-		}
-	}
-
-	~DS3231() {
-		close(file);
-	}
 
 	time_t GetTime(void) {
 
 		union {
-
+            struct rtc_time rtc;
 			struct tm tm;
 		} tm;
-		int ret = ioctl(file, I2C_SLAVE, addr);
+		int ret = ioctl(file, I2C_SLAVE, &tm.rtc);
 		if (ret < 0) {
 			throw std::system_error(errno, std::system_category(),
 					"ioctl failed");
@@ -78,6 +67,12 @@ int main() {
 	printf("Starting the DS3231 test application\n"); //messagae to the user
 
 	int addr = 0x68; // The Address to communicate
+
+	if ((file = open("/dev/i2c-1", O_RDWR)) < 0) {
+				perror("failed to open the bus\n");
+			} else {
+				printf("Opened the bus\n");
+			}
 
 	if (ioctl(file, I2C_SLAVE, addr) < 0) {
 		perror("Failed to connect to the sensor\n");
