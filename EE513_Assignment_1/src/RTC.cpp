@@ -51,7 +51,7 @@ public:
 	          bcdToDec(buf[1]) = 0x01; // Minutes
 	          bcdToDec(buf[2]) = 0x02; //Hours
 	          printf("Time amended on the RTC to current");
-
+	}
 
 
 };
