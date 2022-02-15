@@ -24,12 +24,6 @@ using namespace std;
 class RTC {
 
 
-	RTC(){
-
-
-		addr=0x68; //address
-	}
-
 protected:
 
 	//states
@@ -37,6 +31,13 @@ protected:
 
 public:
 
+	RTC(){
+
+
+		addr=0x68; //address
+	}
+
+    //functions
 	virtual int bcdToDec(char b) { return (b / 16) * 10 + (b % 16);}
 	string display(uint8_t a) {
 		stringstream ss;
