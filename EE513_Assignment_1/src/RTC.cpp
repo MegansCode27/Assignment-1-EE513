@@ -46,7 +46,7 @@ public:
 		ss << setw(3) << (int) a << "(" << bitset<8>(a) << ")";
 		return ss.str();
 	}
-	void writeBytes(){
+	virtual void writeBytes(){
 	          bcdToDec(buf[0]) = 0x00;//Seconds
 	          bcdToDec(buf[1]) = 0x01; // Minutes
 	          bcdToDec(buf[2]) = 0x02; //Hours
