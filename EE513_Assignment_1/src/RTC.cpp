@@ -47,6 +47,30 @@ public:
 		ss << setw(3) << (int) a << "(" << bitset<8>(a) << ")";
 		return ss.str();
 	}
+
+	//get date AS-IS
+
+	virtual void ReadDate_Time(){
+
+
+
+	printf("The RTC time is %02d:%02d:%02d\n", bcdToDec(buf[2]),
+			bcdToDec(buf[1]), bcdToDec(buf[0]));
+
+	printf("The RTC date is %02d:%02d:%03d\n", bcdToDec(buf[4]),
+			bcdToDec(buf[5]), bcdToDec(buf[6]));
+
+	}
+
+	virtual void Read_Temp(){
+
+    int addrTemp=0x11;
+    int addrTempLow=0x12;
+	printf("Temperature is %2d.%2d degress \n",(buf[addrTemp]),(buf[addrTempLow]));
+		}
+
+
+
 	virtual void writeDate_Time(){
 
 
@@ -66,9 +90,16 @@ public:
 	       buf[0] = ltm->tm_sec;//Seconds
 	       buf[1] = ltm->tm_min; // Minutes
 	       buf[2] = 5+ltm->tm_hour; //Hours
-	       printf("The RTC date is %02d:%02d:%03d\n", bcdToDec(buf[0]),
+	       printf("The RTC current time is %02d:%02d:%03d\n", bcdToDec(buf[0]),
 	       			bcdToDec(buf[1]), bcdToDec(buf[2]));
 	       printf("Time amended on the RTC to current");
+
+	       buf[] = ltm->tm_sec;//Seconds
+	       buf[1] = ltm->tm_min; // Minutes
+	      	       buf[2] = 5+ltm->tm_hour; //Hours
+	      	       printf("The RTC current time is %02d:%02d:%03d\n", bcdToDec(buf[0]),
+	      	       			bcdToDec(buf[1]), bcdToDec(buf[2]));
+	      	       printf("Time amended on the RTC to current");
 	}
 
 
@@ -110,27 +141,12 @@ int main() {
 		perror("Failed to read in the buffer\n");
 		return 1;
 	}
-	printf("The RTC time is %02d:%02d:%02d\n", rtc.bcdToDec(buf[2]),
-			rtc.bcdToDec(buf[1]), rtc.bcdToDec(buf[0]));
 
-	printf("The RTC date is %02d:%02d:%03d\n", rtc.bcdToDec(buf[4]),
-			rtc.bcdToDec(buf[5]), rtc.bcdToDec(buf[6]));
 
-	//Temp
+	rtc.ReadDate_Time(); // read current
+	rtc.Read_Temp(); // Get temperature
+	rtc.writeDate_Time();//set time and date
 
-	int addrTemp = 0x11; // The Address to communicate
-
-	if (ioctl(file, I2C_SLAVE, addrTemp) < 0) {
-		perror("Failed to connect to the sensor\n");
-		return 1;
-	} else {
-		//cout << "0x11 & 0x12  (AND) is " << display(addrTemp & addrTempLow) << endl;
-		printf("Temperature is %2d degress \n",(buf[addrTemp]));
-	}
-
-	//set time and date
-
-	rtc.writeDate_Time();
 
 	close(file);
 	return 0;
