@@ -18,6 +18,7 @@ using namespace std;
 #include<iomanip>
 #include <time.h>
 #include <system_error>
+#include <ctime>
 using namespace std;
 #define BUFFER_SIZE 19  //allocates the memory for the OS  //0x00 to 0x12
 
@@ -47,9 +48,27 @@ public:
 		return ss.str();
 	}
 	virtual void writeBytes(){
-	          bcdToDec(buf[0]) = 0x00;//Seconds
-	          bcdToDec(buf[1]) = 0x01; // Minutes
-	          bcdToDec(buf[2]) = 0x02; //Hours
+
+
+		   // current date/time based on current system
+		   time_t now = time(0);
+
+		   cout << "Number of sec since January 1,1970 is:: " << now << endl;
+
+		   tm *ltm = localtime(&now);
+
+
+		   // print various components of tm structure.
+		   cout << "Year:" << 1900 + ltm->tm_year<<endl;
+		   cout << "Month: "<< 1 + ltm->tm_mon<< endl;
+		   cout << "Day: "<< ltm->tm_mday << endl;
+		   cout << "Time: "<< 5+ltm->tm_hour << ":";
+		   cout << 30+ltm->tm_min << ":";
+		   cout << ltm->tm_sec << endl;
+
+	          buf[0] = tm_sec;//Seconds
+	          buf[1] = tm_min ; // Minutes
+	          buf[2] = tm_hour; //Hours
 	          printf("Time amended on the RTC to current");
 	}
 
