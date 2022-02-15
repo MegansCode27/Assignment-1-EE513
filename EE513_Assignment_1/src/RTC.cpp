@@ -47,7 +47,7 @@ public:
 		ss << setw(3) << (int) a << "(" << bitset<8>(a) << ")";
 		return ss.str();
 	}
-	virtual void writeBytes(){
+	virtual void writeDate_Time(){
 
 
 		   // current date/time based on current system
@@ -62,13 +62,12 @@ public:
 		   cout << "Year:" << 1900 + ltm->tm_year<<endl;
 		   cout << "Month: "<< 1 + ltm->tm_mon<< endl;
 		   cout << "Day: "<< ltm->tm_mday << endl;
-		   cout << "Time: "<< 5+ltm->tm_hour << ":";
-		   cout << 30+ltm->tm_min << ":";
-		   cout << ltm->tm_sec << endl;
 
 	       buf[0] = ltm->tm_sec;//Seconds
 	       buf[1] = ltm->tm_min; // Minutes
 	       buf[2] = 5+ltm->tm_hour; //Hours
+	       printf("The RTC date is %02d:%02d:%03d\n", bcdToDec(buf[0]),
+	       			bcdToDec(buf[1]), bcdToDec(buf[2]));
 	       printf("Time amended on the RTC to current");
 	}
 
@@ -131,7 +130,7 @@ int main() {
 
 	//set time and date
 
-	rtc.writeBytes();
+	rtc.writeBytes();//set time
 
 	close(file);
 	return 0;
