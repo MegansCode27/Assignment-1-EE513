@@ -28,6 +28,8 @@ protected:
 
 	//states
 	int addr;
+	char buf[BUFFER_SIZE];
+	char writeBuffer[1] = { 0x00 };
 
 public:
 
@@ -44,6 +46,12 @@ public:
 		ss << setw(3) << (int) a << "(" << bitset<8>(a) << ")";
 		return ss.str();
 	}
+	void writeBytes(){
+	          bcdToDec(buf[0]) = 0x00;//Seconds
+	          bcdToDec(buf[1]) = 0x01; // Minutes
+	          bcdToDec(buf[2]) = 0x02; //Hours
+	          printf("Time amended on the RTC to current");
+
 
 
 };
@@ -102,6 +110,9 @@ int main() {
 		printf("Temperature is %2d degress \n",(buf[addrTemp]));
 	}
 
+	//set time and date
+
+	rtc.writeBuffer();
 
 	close(file);
 	return 0;
