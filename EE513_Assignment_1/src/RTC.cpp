@@ -1,5 +1,5 @@
 /*
- * DS3231.cpp
+ * RTC.cpp
  *
  *  Created on: 8 Feb 2022
  *      Author: megswalsh
@@ -23,12 +23,6 @@ using namespace std;
 
 class RTC {
 
-protected:
-
-	//states
-	int addr;
-
-public:
 
 	RTC(){
 
@@ -36,8 +30,14 @@ public:
 		addr=0x68; //address
 	}
 
+protected:
 
-	int bcdToDec(char b) { return (b / 16) * 10 + (b % 16);}
+	//states
+	int addr;
+
+public:
+
+	virtual int bcdToDec(char b) { return (b / 16) * 10 + (b % 16);}
 	string display(uint8_t a) {
 		stringstream ss;
 		ss << setw(3) << (int) a << "(" << bitset<8>(a) << ")";
@@ -52,7 +52,7 @@ public:
 int main() {
 
     int file;
-    new RTC();//create object of the class
+    RTC rtc;//create object of the class
 
 	// creates a integer value File
 	printf("Starting the DS3231 test application\n"); //messagae to the user
@@ -64,7 +64,7 @@ int main() {
 				printf("Opened the bus\n");
 			}
 
-	if (ioctl(file, I2C_SLAVE, RTC) < 0) {
+	if (ioctl(file, I2C_SLAVE, rtc) < 0) {
 		perror("Failed to connect to the sensor\n");
 		return 1;
 	} else {
@@ -82,11 +82,11 @@ int main() {
 		perror("Failed to read in the buffer\n");
 		return 1;
 	}
-	printf("The RTC time is %02d:%02d:%02d\n", bcdToDec(buf[2]),
-			bcdToDec(buf[1]), bcdToDec(buf[0]));
+	printf("The RTC time is %02d:%02d:%02d\n", rtc.bcdToDec(buf[2]),
+			rtc.bcdToDec(buf[1]), rtc.bcdToDec(buf[0]));
 
-	printf("The RTC date is %02d:%02d:%02d\n", bcdToDec(buf[4]),
-			bcdToDec(buf[5]), bcdToDec(buf[6]));
+	printf("The RTC date is %02d:%02d:%02d\n", rtc.bcdToDec(buf[4]),
+			rtc.bcdToDec(buf[5]), rtc.bcdToDec(buf[6]));
 
 	//Temp
 
