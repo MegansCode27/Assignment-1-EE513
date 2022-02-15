@@ -54,6 +54,7 @@ int main() {
 
     int file;
     RTC rtc;//create object of the class
+    int addr=0x68;
 
 	// creates a integer value File
 	printf("Starting the DS3231 test application\n"); //messagae to the user
@@ -65,7 +66,7 @@ int main() {
 				printf("Opened the bus\n");
 			}
 
-	if (ioctl(file, I2C_SLAVE, rtc) < 0) {
+	if (ioctl(file, I2C_SLAVE,addr) < 0) {
 		perror("Failed to connect to the sensor\n");
 		return 1;
 	} else {
