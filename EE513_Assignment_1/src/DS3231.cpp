@@ -21,52 +21,42 @@ using namespace std;
 using namespace std;
 #define BUFFER_SIZE 19  //allocates the memory for the OS  //0x00 to 0x12
 
-class DS3231 {
+class RTC {
+
+protected:
 
 	//states
-	int file;
-	int addr=0x68;
+	int addr;
 
 public:
 
-	time_t GetTime(void) {
+	RTC(){
 
-		union {
-            struct rtc_time rtc;
-			struct tm tm;
-		} tm;
-		int ret = ioctl(file, RTC_RD_TIME, &tm.rtc);
-		if (ret < 0) {
-			throw std::system_error(errno, std::system_category(),
-					"ioctl failed");
 
-		}
-		return mktime(&tm.tm);
-
+		addr=0x68; //address
 	}
+
+
+	int bcdToDec(char b) { return (b / 16) * 10 + (b % 16);}
+	string display(uint8_t a) {
+		stringstream ss;
+		ss << setw(3) << (int) a << "(" << bitset<8>(a) << ")";
+		return ss.str();
+	}
+
 
 };
 
 // the time is in the registers in encoded decimal form
-int bcdToDec(char b) {
-
-	return (b / 16) * 10 + (b % 16);
-
-}
-string display(uint8_t a) {
-	stringstream ss;
-	ss << setw(3) << (int) a << "(" << bitset<8>(a) << ")";
-	return ss.str();
-}
 
 int main() {
 
-	int file;
-	DS3231 rtc;
+    int file;
+    new RTC();//create object of the class
+
 	// creates a integer value File
 	printf("Starting the DS3231 test application\n"); //messagae to the user
 
-	int addr = 0x68; // The Address to communicate
 
 	if ((file = open("/dev/i2c-1", O_RDWR)) < 0) {
 				perror("failed to open the bus\n");
@@ -74,7 +64,7 @@ int main() {
 				printf("Opened the bus\n");
 			}
 
-	if (ioctl(file, I2C_SLAVE, addr) < 0) {
+	if (ioctl(file, I2C_SLAVE, RTC) < 0) {
 		perror("Failed to connect to the sensor\n");
 		return 1;
 	} else {
@@ -107,12 +97,9 @@ int main() {
 		return 1;
 	} else {
 		//cout << "0x11 & 0x12  (AND) is " << display(addrTemp & addrTempLow) << endl;
-		printf("Temperature is %2d degress \n", bcdToDec(buf[addrTemp]));
+		printf("Temperature is %2d degress \n",(buf[addrTemp]));
 	}
 
-	// set current date and time
-	time_t t = rtc.GetTime();
-	std::cout << "current Time is " << ctime(&t) << std::endl;
 
 	close(file);
 	return 0;
