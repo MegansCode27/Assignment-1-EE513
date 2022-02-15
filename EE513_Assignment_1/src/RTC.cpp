@@ -130,7 +130,7 @@ int main() {
 
 	//set time and date
 
-	rtc.writeBytes();//set time
+	rtc.writeDate_Time();
 
 	close(file);
 	return 0;
