@@ -66,10 +66,10 @@ public:
 		   cout << 30+ltm->tm_min << ":";
 		   cout << ltm->tm_sec << endl;
 
-	          buf[0] = tm_sec;//Seconds
-	          buf[1] = tm_min ; // Minutes
-	          buf[2] = tm_hour; //Hours
-	          printf("Time amended on the RTC to current");
+	       buf[0] = ltm->tm_sec;//Seconds
+	       buf[1] = ltm->tm_min; // Minutes
+	       buf[2] = 5+ltm->tm_hour; //Hours
+	       printf("Time amended on the RTC to current");
 	}
 
 
