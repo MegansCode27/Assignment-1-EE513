@@ -56,12 +56,12 @@ public:
 		   time_t now = time(0);
 		   tm *ltm = localtime(&now);
 
-	       buf[0] = ltm->tm_sec;//Seconds
-	       buf[1] = 30+ltm->tm_min; // Minutes
-	       buf[2] = 1+ltm->tm_hour; //Hours
+	       buf[0] = &ltm->tm_sec;//Seconds
+	       buf[1] = 30+&ltm->tm_min; // Minutes
+	       buf[2] = 1+&ltm->tm_hour; //Hours
 
-	       printf("The RTC current time is %02d:%02d:%02d\n",  bcdToDec( buf[0]),
-	    		   bcdToDec(buf[1]),buf[2]));
+	       printf("The RTC current time is %02d:%02d:%02d\n",  bcdToDec(buf[0]),
+	    		   bcdToDec(buf[1]),bcdToDec(buf[2]));
 
 
 
@@ -117,8 +117,8 @@ int main() {
 
     //DS3231 Times on startup
 
-	printf("The RTC time is %02d:%02d:%02d\n", rtc.bcdToDec(buf[0]),
-			rtc.bcdToDec(buf[1]), rtc.bcdToDec(buf[2]));
+	printf("The RTC time is %02d:%02d:%02d\n", rtc.bcdToDec(buf[2]),
+			rtc.bcdToDec(buf[1]), rtc.bcdToDec(buf[0]));
 
 	printf("The RTC date is %02d:%02d:%04d\n", rtc.bcdToDec(buf[4]),
 			rtc.bcdToDec(buf[5]), rtc.bcdToDec(buf[6]));
