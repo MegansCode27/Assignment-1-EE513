@@ -143,7 +143,7 @@ int main() {
 	else{
 
 
-   printf("Temperature is %02d:%2d degress \n",(buf[addrTemp]),(buf[addrTempLow]));
+   printf("Temperature is %02d:%01d degress \n",(buf[addrTemp]),(buf[addrTempLow]));
 
 	}
 
