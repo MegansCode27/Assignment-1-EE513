@@ -69,7 +69,7 @@ public:
 	       buf[6] = 1900+ltm->tm_year; // Year
 
 
-	      printf("The RTC current Date is %02d\n", buf[4]);
+	      printf("The RTC current Date is %02d:%02\n", buf[4],buf[5],buf[6]);
 
 	}
 
