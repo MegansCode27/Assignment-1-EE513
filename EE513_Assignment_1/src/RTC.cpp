@@ -62,10 +62,9 @@ public:
 
 
 	       cout << ltm->tm_hour<<endl;
-	       cout<< buf[2]<<endl;
 
-	       printf("The RTC current time is %02d:%02d:%02d\n", buf[0],
-	    		   buf[1],buf[2]);
+	       printf("The RTC current time is %02d:%02d:%02d\n",/* buf[0],
+	    		   buf[1],*/ buf[2]);
 
 
 
