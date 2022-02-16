@@ -66,7 +66,8 @@ public:
 
     int addrTemp=0x11;
     int addrTempLow=0x12;
-	printf("Temperature is %2d.%2d degress \n",(buf[addrTemp]),(buf[addrTempLow]));
+
+	printf("Temperature is %2d:%2d degress \n",(buf[addrTemp]),(buf[addrTempLow]));
 		}
 
 
