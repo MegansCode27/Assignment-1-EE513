@@ -67,7 +67,7 @@ public:
 
 	       buf[0] = ltm->tm_sec;//Seconds
 	       buf[1] = ltm->tm_min; // Minutes
-	       buf[2] = 5+ltm->tm_hour; //Hours
+	       buf[2] = ltm->tm_hour; //Hours
 
 	       printf("The RTC current time is %02d:%02d:%02d\n", buf[0],
 	       			buf[1], buf[2]);
@@ -75,13 +75,13 @@ public:
 
 
 	       buf[4] = ltm->tm_mday; //Day
-	       buf[5] = 1 + ltm->tm_mon; // Month
-	       buf[6] = 1900 + ltm->tm_year; // Year
-	      	       buf[2] = 5+ltm->tm_hour; //Hours
+	       buf[5] = ltm->tm_mon; // Month
+	       buf[6] = ltm->tm_year; // Year
+	      	       buf[2] = ltm->tm_hour; //Hours
 
 	      	       printf("The RTC current Date is %02d:%02d:%02d\n", bcdToDec(buf[4]),
 	      	       			bcdToDec(buf[5]), bcdToDec(buf[6]));
-	      	       printf("Time amended on the RTC to current");
+
 	}
 
 
