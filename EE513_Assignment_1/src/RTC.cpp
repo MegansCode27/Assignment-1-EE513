@@ -69,7 +69,7 @@ public:
 	       buf[1] = ltm->tm_min; // Minutes
 	       buf[2] = ltm->tm_hour; //Hours
 
-	       printf("The RTC current time is %02d:%02d:%02d\n", buf[0],
+	       printf("The RTC current time is %02d:%02d:%04d\n",  bcdToDec(buf[0]),
 	       			buf[1], buf[2]);
 
 
@@ -79,7 +79,7 @@ public:
 	       buf[6] = ltm->tm_year; // Year
 	      	       buf[2] = ltm->tm_hour; //Hours
 
-	      	       printf("The RTC current Date is %02d:%02d:%02d\n", bcdToDec(buf[4]),
+	      	       printf("The RTC current Date is %02d:%02d:%04d\n", bcdToDec(buf[4]),
 	      	       			bcdToDec(buf[5]), bcdToDec(buf[6]));
 
 	}
@@ -143,7 +143,7 @@ int main() {
 	else{
 
 
-   printf("Temperature is %02d:%01d degress \n",(buf[addrTemp]),(buf[addrTempLow]));
+   printf("Temperature is %02d degress \n",(buf[addrTemp]),(buf[addrTempLow]));
 
 	}
 
