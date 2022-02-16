@@ -69,7 +69,7 @@ public:
 	       buf[6] = 1900+ltm->tm_year; // Year
 
           cout <<1900+ltm->tm_year<<endl;
-	      printf("The RTC current Date is %1$td:%1$tm:%1$ty \n", buf[4],buf[5],buf[6]);
+	      printf("The RTC current Date is %1$td:%2$tm:%1$ty \n", buf[4],buf[5],buf[6]);
 
 	}
 
