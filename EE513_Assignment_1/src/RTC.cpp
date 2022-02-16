@@ -66,8 +66,8 @@ public:
 
 
 	       buf[4] = ltm->tm_mday; //Day
-	       buf[5] = ltm->tm_mon; // Month
-	       buf[6] = ltm->tm_year; // Year
+	       buf[5] = 1+ ltm->tm_mon; // Month
+	       buf[6] = 1900+ltm->tm_year; // Year
 	      	       buf[2] = ltm->tm_hour; //Hours
 
 	      	       printf("The RTC current Date is %02d:%02d:%02d\n", bcdToDec(buf[4]),
