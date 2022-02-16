@@ -62,13 +62,6 @@ public:
 
 	}
 
-	virtual void Read_Temp(){
-
-    int addrTemp=0x11;
-    int addrTempLow=0x12;
-
-	printf("Temperature is %02d:%02d degress \n",(buf[addrTemp]),(buf[addrTempLow]));
-		}
 
 
 
@@ -92,6 +85,7 @@ public:
 	       buf[5] = 1 + ltm->tm_mon; // Month
 	       buf[6] = 1900 + ltm->tm_year; // Year
 	      	       buf[2] = 5+ltm->tm_hour; //Hours
+
 	      	       printf("The RTC current Date is %02d:%02d:%02d\n", bcdToDec(buf[4]),
 	      	       			bcdToDec(buf[5]), bcdToDec(buf[6]));
 	      	       printf("Time amended on the RTC to current");
@@ -139,7 +133,21 @@ int main() {
 
 
 	rtc.ReadDate_Time(); // read current
-	rtc.Read_Temp(); // Get temperature
+
+
+	 int addrTemp=0x11;
+     int addrTempLow=0x12;
+	if (ioctl(file, I2C_SLAVE,(addrTemp && addrTempLow)) < 0) {
+	perror("Failed to connect to the sensor\n");
+	return 1;
+	}
+	else{
+
+
+   printf("Temperature is %02d:%02d degress \n",(buf[addrTemp]),(buf[addrTempLow]));
+
+	}
+
 	rtc.writeDate_Time();//set time and date
 
 
