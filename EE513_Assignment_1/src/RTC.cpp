@@ -129,7 +129,7 @@ int main() {
 	printf("The RTC time is %02d:%02d:%02d\n", rtc.bcdToDec(buf[2]),
 			rtc.bcdToDec(buf[1]), rtc.bcdToDec(buf[0]));
 
-	printf("The RTC date is %02d:%02d:%03d\n", rtc.bcdToDec(buf[4]),
+	printf("The RTC date is %02d:%02d:%04d\n", rtc.bcdToDec(buf[4]),
 			rtc.bcdToDec(buf[5]), rtc.bcdToDec(buf[6]));
 
 	//Returns the temp
