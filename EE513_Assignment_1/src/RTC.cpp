@@ -48,15 +48,6 @@ public:
 		return ss.str();
 	}
 
-	//get date AS-IS
-
-	virtual void ReadDate_Time(){
-
-
-	}
-
-
-
 
 	virtual void writeDate_Time(){
 
@@ -65,12 +56,12 @@ public:
 		   time_t now = time(0);
 		   tm *ltm = localtime(&now);
 
-	       buf[0] = 3+ltm->tm_sec;//Seconds
+	       buf[0] = ltm->tm_sec;//Seconds
 	       buf[1] = ltm->tm_min; // Minutes
-	       buf[2] = ltm->tm_hour; //Hours
+	       buf[2] = 3+ltm->tm_hour; //Hours
 
 	       printf("The RTC current time is %02d:%02d:%04d\n",  buf[0],
-	       			buf[1], buf[2]);
+	       			buf[1], bcdToDec(buf[2]));
 
 
 
@@ -79,7 +70,7 @@ public:
 	       buf[6] = ltm->tm_year; // Year
 	      	       buf[2] = ltm->tm_hour; //Hours
 
-	      	       printf("The RTC current Date is %02d:%02d:%04d\n", buf[4],
+	      	       printf("The RTC current Date is %02d:%02d:%02d\n", buf[4],
 	      	       			buf[5], buf[6]);
 
 	}
