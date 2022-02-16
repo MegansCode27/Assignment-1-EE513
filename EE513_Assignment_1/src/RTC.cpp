@@ -76,16 +76,7 @@ public:
 
 		   // current date/time based on current system
 		   time_t now = time(0);
-
-		   cout << "Number of sec since January 1,1970 is:: " << now << endl;
-
 		   tm *ltm = localtime(&now);
-
-
-		   // print various components of tm structure.
-		   cout << "Year:" << 1900 + ltm->tm_year<<endl;
-		   cout << "Month: "<< 1 + ltm->tm_mon<< endl;
-		   cout << "Day: "<< ltm->tm_mday << endl;
 
 	       buf[0] = ltm->tm_sec;//Seconds
 	       buf[1] = ltm->tm_min; // Minutes
@@ -94,8 +85,9 @@ public:
 	       			bcdToDec(buf[1]), bcdToDec(buf[2]));
 	       printf("Time amended on the RTC to current");
 
-	       buf[] = ltm->tm_sec;//Seconds
-	       buf[1] = ltm->tm_min; // Minutes
+	       buf[4] = ltm->tm_mday; //Day
+	       buf[5] = 1 + ltm->tm_mon; // Month
+	       buf[6] = 1900 + ltm->tm_year; // Year
 	      	       buf[2] = 5+ltm->tm_hour; //Hours
 	      	       printf("The RTC current time is %02d:%02d:%03d\n", bcdToDec(buf[0]),
 	      	       			bcdToDec(buf[1]), bcdToDec(buf[2]));
