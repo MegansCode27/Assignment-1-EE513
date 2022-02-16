@@ -82,8 +82,9 @@ public:
 	       buf[0] = ltm->tm_sec;//Seconds
 	       buf[1] = ltm->tm_min; // Minutes
 	       buf[2] = 5+ltm->tm_hour; //Hours
-	       printf("The RTC current time is %02d:%02d:%02d\n", bcdToDec(buf[0]),
-	       			bcdToDec(buf[1]), bcdToDec(buf[2]));
+
+	       printf("The RTC current time is %02d:%02d:%02d\n", buf[0],
+	       			buf[1], buf[2]);
 
 
 
