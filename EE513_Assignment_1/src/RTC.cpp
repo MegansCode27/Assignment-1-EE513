@@ -53,13 +53,6 @@ public:
 	virtual void ReadDate_Time(){
 
 
-
-	printf("The RTC time is %02d:%02d:%02d\n", bcdToDec(buf[2]),
-			bcdToDec(buf[1]), bcdToDec(buf[0]));
-
-	printf("The RTC date is %02d:%02d:%03d\n", bcdToDec(buf[4]),
-			bcdToDec(buf[5]), bcdToDec(buf[6]));
-
 	}
 
 
@@ -131,12 +124,18 @@ int main() {
 		return 1;
 	}
 
+    //DS3231 Times on startup
 
-	rtc.ReadDate_Time(); // read current
+	printf("The RTC time is %02d:%02d:%02d\n", rtc.bcdToDec(buf[2]),
+			rtc.bcdToDec(buf[1]), rtc.bcdToDec(buf[0]));
 
+	printf("The RTC date is %02d:%02d:%03d\n", rtc.bcdToDec(buf[4]),
+			rtc.bcdToDec(buf[5]), rtc.bcdToDec(buf[6]));
 
-	 int addrTemp=0x11;
-     int addrTempLow=0x12;
+	//Returns the temp
+
+	int addrTemp=0x11;
+    int addrTempLow=0x12;
 	if (ioctl(file, I2C_SLAVE,(addrTemp && addrTempLow)) < 0) {
 	perror("Failed to connect to the sensor\n");
 	return 1;
@@ -144,7 +143,7 @@ int main() {
 	else{
 
 
-   printf("Temperature is %02d:%02d degress \n",(buf[addrTemp]),(buf[addrTempLow]));
+   printf("Temperature is %02d:%2d degress \n",(buf[addrTemp]),(buf[addrTempLow]));
 
 	}
 
