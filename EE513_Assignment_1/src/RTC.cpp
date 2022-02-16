@@ -61,7 +61,7 @@ public:
 	       buf[2] = 1+ltm->tm_hour; //Hours
 
 	       printf("The RTC current time is %02d:%02d:%02d\n",  bcdToDec( buf[0]),
-	    		   bcdToDec(buf[1]),buf[2]);
+	    		   bcdToDec(buf[1]),buf[2]));
 
 
 
@@ -139,6 +139,9 @@ int main() {
 	}
 
 	rtc.writeDate_Time();//set time and date
+
+	//Alarms
+
 
 
 	close(file);
