@@ -86,14 +86,14 @@ public:
 	       			bcdToDec(buf[1]), bcdToDec(buf[2]));
 
 
+
 	       buf[4] = ltm->tm_mday; //Day
 	       buf[5] = 1 + ltm->tm_mon; // Month
 	       buf[6] = 1900 + ltm->tm_year; // Year
 	      	       buf[2] = 5+ltm->tm_hour; //Hours
-	      	       printf("The RTC current time is %02d:%02d:%03d\n", bcdToDec(buf[0]),
-	      	       			bcdToDec(buf[1]), bcdToDec(buf[2]));
-
-
+	      	       printf("The RTC current Date is %02d:%02d:%03d\n", bcdToDec(buf[4]),
+	      	       			bcdToDec(buf[5]), bcdToDec(buf[6]));
+	      	       printf("Time amended on the RTC to current");
 	}
 
 
