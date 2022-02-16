@@ -56,10 +56,11 @@ public:
 		   time_t now = time(0);
 		   tm *ltm = localtime(&now);
 
-	       buf[0] = &ltm->tm_sec;//Seconds
-	       buf[1] = 30+&ltm->tm_min; // Minutes
-	       buf[2] = 1+&ltm->tm_hour; //Hours
+	       buf[0] = ltm->tm_sec;//Seconds
+	       buf[1] = 30+ltm->tm_min; // Minutes
+	       buf[2] = 1+ltm->tm_hour; //Hours
 
+	       cout << ltm->tm_sec <<endl;
 	       printf("The RTC current time is %02d:%02d:%02d\n",  bcdToDec(buf[0]),
 	    		   bcdToDec(buf[1]),bcdToDec(buf[2]));
 
@@ -70,8 +71,8 @@ public:
 	       buf[6] = 1900+ltm->tm_year; // Year
 
 
-	      	       printf("The RTC current Date is %02d:%02d:%02d\n", bcdToDec(buf[4]),
-	      	    		 bcdToDec(buf[5]),  bcdToDec(buf[6]));
+	      printf("The RTC current Date is %02d:%02d:%02d\n", bcdToDec(buf[4]),
+	       bcdToDec(buf[5]),  bcdToDec(buf[6]));
 
 	}
 
