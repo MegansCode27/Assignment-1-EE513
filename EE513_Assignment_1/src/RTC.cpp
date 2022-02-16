@@ -54,7 +54,7 @@ public:
 
 		   // current date/time based on current system
 		   time_t now = time(0);
-		   tm *ltm = gmtime(&now);
+		   tm *ltm = localtime(&now);
 
 	       buf[0] = ltm->tm_sec;//Seconds
 	       buf[1] = 30+ltm->tm_min; // Minutes
