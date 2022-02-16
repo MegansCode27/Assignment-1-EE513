@@ -60,7 +60,7 @@ public:
 	       buf[1] = 30+ltm->tm_min; // Minutes
 	       buf[2] = 1+ltm->tm_hour; //Hours
 
-	       cout << ltm->tm_sec <<endl;
+	       cout << 1+ltm->tm_hour<<endl;
 	       printf("The RTC current time is %02d:%02d:%02d\n",  bcdToDec(buf[0]),
 	    		   bcdToDec(buf[1]),bcdToDec(buf[2]));
 
