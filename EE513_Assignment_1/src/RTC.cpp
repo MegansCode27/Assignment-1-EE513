@@ -60,9 +60,6 @@ public:
 	       buf[1] = ltm->tm_min; // Minutes
 	       buf[2] = ltm->tm_hour; //Hours
 
-
-	       cout << ltm->tm_hour<<endl;
-
 	       printf("The RTC current time is %02d:%02d:%02d\n",buf[2],buf[1],buf[0]);
 
 
@@ -72,8 +69,7 @@ public:
 	       buf[6] = 1900+ltm->tm_year; // Year
 
 
-	      printf("The RTC current Date is %02d:%02d:%02d\n", bcdToDec(buf[4]),
-	       bcdToDec(buf[5]),  bcdToDec(buf[6]));
+	      printf("The RTC current Date is %02d\n", buf[4]);
 
 	}
 
