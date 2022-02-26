@@ -83,14 +83,6 @@ public:
 	       buf[0]= ltm->tm_mday;
 
 	       printf("The RTC Alarm is set for:");
-	       cout<<
-
-
-	       buf[4] = ltm->tm_mday; //Day
-	       buf[5] = 1+ ltm->tm_mon; // Month
-	       buf[6] = 1900+ltm ->tm_year; // Year
-
-	      printf("The RTC current Date is  %d-%02d-%04d\n", buf[4],buf[5],buf[6]);
 
 	}
 
@@ -158,6 +150,7 @@ int main() {
 	}
 
 	rtc.writeDate_Time();//set time and date
+	rtc.SetAlarm_1();
 
 	//Alarms
 
