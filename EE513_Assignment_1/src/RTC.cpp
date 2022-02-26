@@ -72,6 +72,29 @@ public:
 
 	}
 
+	virtual void SetAlarm_1(){
+
+		   time_t now = time(0);
+		   tm *ltm = localtime(&now);
+
+	       buf[7] = ltm->tm_sec;//Seconds
+	       buf[8] = 30+ltm->tm_min; // Minutes
+	       buf[9] = 2+ltm->tm_hour; //Hours
+	       buf[0]= ltm->tm_mday;
+
+	       printf("The RTC Alarm is set for:");
+	       cout<<
+
+
+	       buf[4] = ltm->tm_mday; //Day
+	       buf[5] = 1+ ltm->tm_mon; // Month
+	       buf[6] = 1900+ltm ->tm_year; // Year
+
+          cout <<1900+ltm->tm_year<<endl;
+	      printf("The RTC current Date is  %d-%02d-%04d\n", buf[4],buf[5],buf[6]);
+
+	}
+
 
 };
 
