@@ -68,7 +68,7 @@ public:
 	       buf[6] = 1900+ltm ->tm_year; // Year
 
           cout <<ltm->tm_year<<endl;
-	      printf("The RTC current Date is  %d-%02d-%024\n", buf[4],buf[5],buf[6]);
+	      printf("The RTC current Date is  %d-%02d-%04\n", buf[4],buf[5],buf[6]);
 
 	}
 
@@ -82,7 +82,7 @@ public:
 	       buf[9] = 2+ltm->tm_hour; //Hours
 	       buf[0]= ltm->tm_mday;
 
-	       printf("The RTC Alarm is set for:");
+	       printf("The RTC Alarm is set for  %d-%02d-%04\n:");
 
 	}
 
