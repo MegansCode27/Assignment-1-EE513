@@ -79,7 +79,7 @@ public:
 	       buf[7] = ltm->tm_sec;//Seconds
 	       buf[8] = 30+ltm->tm_min; // Minutes
 	       buf[9] = 2+ltm->tm_hour; //Hours
-	       //buf[0]= ltm->tm_mday;
+	       buf[0A]= ltm->tm_mday;
 
 	       printf("The RTC Alarm is set for  %02d-%02d-%02\n:");
 
