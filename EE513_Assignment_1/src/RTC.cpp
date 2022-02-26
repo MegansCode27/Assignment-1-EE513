@@ -67,7 +67,7 @@ public:
 	       buf[5] = 1+ ltm->tm_mon; // Month
 	       buf[6] = (1900+ltm)->tm_year; // Year
 
-	      printf("The RTC current Date is  %d:%02d:%02d\n", buf[4],buf[5],buf[6]);
+	       printf("The RTC current Date is  %d:%02d:%02d\n", buf[4],buf[5],buf[6]);
 
 	}
 
@@ -79,9 +79,9 @@ public:
 	       buf[7] = ltm->tm_sec;//Seconds
 	       buf[8] = 30+ltm->tm_min; // Minutes
 	       buf[9] = 2+ltm->tm_hour; //Hours
-	       buf[0]= ltm->tm_mday;
+	       //buf[0]= ltm->tm_mday;
 
-	       printf("The RTC Alarm is set for  %d-%02d-%04\n:");
+	       printf("The RTC Alarm is set for  %02d-%02d-%02\n:");
 
 	}
 
