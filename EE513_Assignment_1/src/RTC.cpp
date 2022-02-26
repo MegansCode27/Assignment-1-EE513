@@ -67,7 +67,6 @@ public:
 	       buf[5] = 1+ ltm->tm_mon; // Month
 	       buf[6] = (1900+ltm)->tm_year; // Year
 
-          cout <<1900+ ltm->tm_year<<endl;
 	      printf("The RTC current Date is  %d:%02d:%02d\n", buf[4],buf[5],buf[6]);
 
 	}
